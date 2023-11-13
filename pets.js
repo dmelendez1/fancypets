@@ -45,43 +45,38 @@ let pets = [
     }
  ];
  
+ let petsContainer = document.getElementById('pets-container');
 
+ function createAndAppendParagraph(content, parentElement) {
+     let paragraph = document.createElement('p');
+     paragraph.classList.add('card-text');
+     paragraph.innerText = content;
+     parentElement.appendChild(paragraph);
+ }
 
-let petsContainer = document.getElementById('pets-container');
+ pets.forEach(pet => {
+     let card = document.createElement('div');
+     card.className = 'card col-md-4 mb-4';
 
-pets.forEach(pet => {
+     let img = document.createElement('img');
+     img.src = pet.image;
+     img.className = 'card-img-top';
+     card.appendChild(img);
 
-    let card = document.createElement('div'); //card divs//
-    card.className ='card col-md-4 mb-4';
+     let cardBody = document.createElement('div');
+     cardBody.className = 'card-body';
 
-    let img = document.createElement('img'); //imageElement//
-    img.src = pet.image;
-    img.className = 'card-img-top';
-    card.appendChild(img);
+     let title = document.createElement('h2');
+     title.className = 'card-title';
+     title.textContent = pet.name; 
+     cardBody.appendChild(title);
 
-    let cardBody = document.createElement('div'); //card div//
-    cardBody.className = 'card-body';
+     createAndAppendParagraph(`Type: ${pet.type}`, cardBody);
+     createAndAppendParagraph(`Breed: ${pet.breed}`, cardBody);
+     createAndAppendParagraph(`Best Trick: ${pet.bestTrick}`, cardBody);
 
-    let title = document.createElement('h2');
-    title.className = 'card-title';
-    title.textContent = pet.Name;
-    cardBody.appendChild(title);
-
-    function createAndAppendParagraph(content, parentElement) {
-        let paragraph = document.createElement('p');
-        paragraph.classList.add('card-text');
-        paragraph.innerText = content;
-        parentElement.appendChild(paragraph);
-    };
-
-    addParagraph(`Type: ${pet.type}`);
-    addParagraph(`Breed: ${pet.breed}`);
-    addParagraph(`Best Trick: ${pet.bestTrick}`);
-
-   
-    card.appendChild(cardBody);
-
-    
-    petsContainer.appendChild(card);
+     card.appendChild(cardBody);
+     petsContainer.appendChild(card);
+ });
 });
-});
+
